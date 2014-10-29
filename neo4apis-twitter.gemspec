@@ -18,7 +18,7 @@ A ruby gem using neo4apis to make importing twitter data to neo4j easy
   EOF
 
   s.require_path = 'lib'
-  s.files = Dir.glob("{bin,lib,config}/**/*") + %w(README.md CHANGELOG CONTRIBUTORS Gemfile neo4apis.gemspec)
+  s.files = Dir.glob("{bin,lib,config}/**/*") + %w(README.md Gemfile neo4apis.gemspec)
 
   s.add_dependency('neo4apis', "~> 0.0.1")
 
