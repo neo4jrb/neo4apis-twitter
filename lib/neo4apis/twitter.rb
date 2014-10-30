@@ -2,7 +2,6 @@ require 'neo4apis'
 
 module Neo4Apis
   class Twitter < Base
-    VERSION = '0.0.1'
     PREFIX = 'twitter'
 
     def initialize(neo4j_client, options = {})
