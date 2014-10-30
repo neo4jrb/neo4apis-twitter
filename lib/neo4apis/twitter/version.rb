@@ -1,6 +1,8 @@
+require 'neo4apis'
+
 module Neo4Apis
-  class Twitter
-    VERSION = '0.0.1'
+  class Twitter < Base
+    VERSION = '0.0.2'
   end
 end
 

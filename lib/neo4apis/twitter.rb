@@ -2,32 +2,13 @@ require 'neo4apis'
 
 module Neo4Apis
   class Twitter < Base
-    PREFIX = 'twitter'
+    uuid :Tweet, :id
+    uuid :User, :id
 
-    def initialize(neo4j_client, options = {})
-      @client = options[:twitter_client]
+    importer :Tweet do |tweet|
+      user_node = import :User, tweet.user
 
-      raise ArgumentError, "Invalid client: #{@client.inspect}" if not @client.is_a?(::Twitter::REST::Client)
-
-      options[:uuids] = (options[:uuids] || {}).merge({
-        Tweet: :id,
-        User: :id
-      })
-
-      super(neo4j_client, options)
-    end
-
-    def import_search(*args)
-      @client.search(*args).take(100).each do |tweet|
-        add_tweet(tweet)
-      end
-    end
-
-    private
-    
-    def add_tweet(tweet)
-      user_node = add_user(tweet.user)
-      retweeted_tweet_node = add_tweet(tweet.retweeted_tweet) if tweet.retweeted_tweet?
+      retweeted_tweet_node = import :Tweet, tweet.retweeted_tweet if options[:import_retweets] && tweet.retweeted_tweet?
 
       node = add_node :Tweet, {
         id: tweet.id,
@@ -35,12 +16,12 @@ module Neo4Apis
       }
 
       add_relationship(:tweeted, user_node, node)
-      add_relationship(:retweets, node, retweeted_tweet_node) if tweet.retweeted_tweet?
+      add_relationship(:retweets, node, retweeted_tweet_node) if options[:import_retweets] && tweet.retweeted_tweet?
 
       node
     end
 
-    def add_user(user)
+    importer :User do |user|
       add_node :User, {
         id: user.id,
         screen_name: user.screen_name,
