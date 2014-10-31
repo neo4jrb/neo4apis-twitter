@@ -22,3 +22,4 @@ end
 
 ```
 
+Currently supports importing User and Tweet
