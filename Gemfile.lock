@@ -3,6 +3,7 @@ PATH
   specs:
     neo4apis-twitter (0.0.2)
       neo4apis (~> 0.0.2)
+      twitter (~> 5.12.0)
 
 GEM
   remote: https://rubygems.org/
@@ -94,4 +95,3 @@ DEPENDENCIES
   neo4apis-twitter!
   pry
   rspec
-  twitter
