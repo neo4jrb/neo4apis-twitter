@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    neo4apis-twitter (0.0.4)
-      neo4apis (~> 0.0.4)
+    neo4apis-twitter (0.0.3)
+      neo4apis (~> 0.1.0)
       twitter (~> 5.12.0)
 
 GEM
@@ -39,10 +39,10 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     naught (1.0.0)
-    neo4apis (0.0.4)
+    neo4apis (0.1.0)
       faraday (~> 0.9.0)
-      neo4j-core (~> 3.0.3)
-    neo4j-core (3.0.3)
+      neo4j-core (~> 3.0.4)
+    neo4j-core (3.0.4)
       activesupport
       faraday (~> 0.9.0)
       faraday_middleware (~> 0.9.1)

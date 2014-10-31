@@ -11,10 +11,7 @@ module Neo4Apis
 
       retweeted_tweet_node = import :Tweet, tweet.retweeted_tweet if options[:import_retweets] && tweet.retweeted_tweet?
 
-      node = add_node :Tweet, {
-        id: tweet.id,
-        text: tweet.text,
-      }
+      node = add_node :Tweet, tweet, %w{id text}
 
       if options[:import_hashtags] && tweet.respond_to?(:hashtags)
         tweet.hashtags.each do |hashtag|
@@ -32,23 +29,19 @@ module Neo4Apis
     end
 
     importer :User do |user|
-      add_node :User, {
-        id: user.id,
-        screen_name: user.screen_name,
-        name: user.name,
-        location: user.location,
-        profile_image_url: user.profile_image_url.to_s
-      }
+      add_node(:User, user, %w{id screen_name name location}) do |node|
+        node.profile_image_url = user.profile_image_url.to_s
+      end
     end
 
     importer :HashTag do |hashtag|
-      add_node :HashTag, {
-        text: hashtag.text.downcase
-      }
+      add_node :HashTag do |node|
+        node.text = hashtag.text.downcase
+      end
     end
 
     def self.default_flush_size
-      3000
+      1000
     end
 
   end
