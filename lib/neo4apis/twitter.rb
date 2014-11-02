@@ -2,9 +2,13 @@ require 'neo4apis'
 
 module Neo4Apis
   class Twitter < Base
+    prefix :Twitter
+
     uuid :Tweet, :id
     uuid :User, :id
     uuid :HashTag, :text
+
+    batch_size 1000
 
     importer :Tweet do |tweet|
       user_node = import :User, tweet.user
@@ -38,10 +42,6 @@ module Neo4Apis
       add_node :HashTag do |node|
         node.text = hashtag.text.downcase
       end
-    end
-
-    def self.default_flush_size
-      1000
     end
 
   end
