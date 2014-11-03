@@ -54,3 +54,15 @@ Supported options:
  * `locale`
  * `result_type`
  * `until`
+
+##### Config file
+
+The default path for the config file is `config/twitter.yml`, but you can specify your path with the `--config-path` option.  The configuration file should match the keys in the [twitter gem`s documentation](https://github.com/sferik/twitter/blob/master/examples/Configuration.md).  The following is an example:
+
+```yaml
+---
+:consumer_key: <consumer_key>
+:consumer_secret: <consumer_secret>
+:access_token: <access_token>
+:access_token_secret: <access_token_secret>
+```
