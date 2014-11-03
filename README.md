@@ -59,6 +59,8 @@ Supported options:
 
 ##### Config file
 
+Register your app for a Twitter key and token at [https://apps.twitter.com](https://apps.twitter.com). You will need to provide a URL and can use `http://127.0.0.1`.
+
 The default path for the config file is `config/twitter.yml`, but you can specify your path with the `--config-path` option.  The configuration file should match the keys in the [twitter gem`s documentation](https://github.com/sferik/twitter/blob/master/examples/Configuration.md).  The following is an example:
 
 ```yaml
