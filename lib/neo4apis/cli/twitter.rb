@@ -6,6 +6,9 @@ module Neo4Apis
     class Twitter < Thor
       class_option :config_path, type: :string,  default: 'config/twitter.yml'
 
+      class_option :import_retweets, type: :boolean, default: false
+      class_option :import_hashtags, type: :boolean, default: false
+
       desc "filter TRACK", "Streams tweets via a filter"
       def filter(track)
         neo4apis_client.batch do
@@ -42,7 +45,7 @@ module Neo4Apis
       NEO4APIS_CLIENT_CLASS = ::Neo4Apis::Twitter    
 
       def neo4apis_client
-        @neo4apis_client ||= NEO4APIS_CLIENT_CLASS.new(Neo4j::Session.open(:server_db, parent_options[:neo4j_url]), import_retweets: true, import_hashtags: true)
+        @neo4apis_client ||= NEO4APIS_CLIENT_CLASS.new(Neo4j::Session.open(:server_db, parent_options[:neo4j_url]), import_retweets: options[:import_retweets], import_hashtags: options[:import_hashtags])
       end
 
       def twitter_client(streaming)
