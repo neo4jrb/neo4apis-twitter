@@ -5,7 +5,6 @@ module Neo4Apis
   module CLI
     class Twitter < Thor
       class_option :config_path, type: :string,  default: 'config/twitter.yml'
-      ENV_REGEX = /^ENV\['([A-Z_0-9\-.]+)'\]$/
 
       class_option :import_retweets, type: :boolean, default: false
       class_option :import_hashtags, type: :boolean, default: false
@@ -56,7 +55,6 @@ module Neo4Apis
 
         @twitter_client = twitter_client_class.new do |config|
           yml_config.each do |key, value|
-            value = value =~ ENV_REGEX ? ENV[value.match(ENV_REGEX)[1]] : value
             config.send("#{key}=", value)
           end
         end
@@ -65,8 +63,15 @@ module Neo4Apis
       # For reference for this gem's documentation:
       # https://github.com/sferik/twitter/blob/master/examples/Configuration.md
       def yml_config
+        return @yml_config if @yml_config
+
         require 'yaml'
-        @yml_config ||= YAML.load(File.open(options[:config_path]).read)
+        data = File.open(options[:config_path]).read
+
+        require 'erb'
+        data = ERB.new(data).result(binding)
+
+        @yml_config ||= YAML.load(data)
       end
     end
 
