@@ -5,6 +5,7 @@ module Neo4Apis
   module CLI
     class Twitter < Thor
       class_option :config_path, type: :string,  default: 'config/twitter.yml'
+      ENV_REGEX = /^ENV\['([A-Z_0-9\-.]+)'\]$/
 
       desc "filter TRACK", "Streams tweets via a filter"
       def filter(track)
@@ -39,7 +40,7 @@ module Neo4Apis
         end
       end
 
-      NEO4APIS_CLIENT_CLASS = ::Neo4Apis::Twitter    
+      NEO4APIS_CLIENT_CLASS = ::Neo4Apis::Twitter
 
       def neo4apis_client
         @neo4apis_client ||= NEO4APIS_CLIENT_CLASS.new(Neo4j::Session.open(:server_db, parent_options[:neo4j_url]), import_retweets: true, import_hashtags: true)
@@ -52,6 +53,7 @@ module Neo4Apis
 
         @twitter_client = twitter_client_class.new do |config|
           yml_config.each do |key, value|
+            value = value =~ ENV_REGEX ? ENV[value.match(ENV_REGEX)[1]] : value
             config.send("#{key}=", value)
           end
         end
