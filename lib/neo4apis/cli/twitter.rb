@@ -1,4 +1,5 @@
 require 'twitter'
+require 'thor'
 
 module Neo4Apis
   module CLI
