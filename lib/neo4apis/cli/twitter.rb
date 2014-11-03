@@ -42,7 +42,7 @@ module Neo4Apis
         end
       end
 
-      NEO4APIS_CLIENT_CLASS = ::Neo4Apis::Twitter    
+      NEO4APIS_CLIENT_CLASS = ::Neo4Apis::Twitter
 
       def neo4apis_client
         @neo4apis_client ||= NEO4APIS_CLIENT_CLASS.new(Neo4j::Session.open(:server_db, parent_options[:neo4j_url]), import_retweets: options[:import_retweets], import_hashtags: options[:import_hashtags])
@@ -63,8 +63,15 @@ module Neo4Apis
       # For reference for this gem's documentation:
       # https://github.com/sferik/twitter/blob/master/examples/Configuration.md
       def yml_config
+        return @yml_config if @yml_config
+
         require 'yaml'
-        @yml_config ||= YAML.load(File.open(options[:config_path]).read)
+        data = File.open(options[:config_path]).read
+
+        require 'erb'
+        data = ERB.new(data).result(binding)
+
+        @yml_config ||= YAML.load(data)
       end
     end
 
