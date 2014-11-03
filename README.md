@@ -11,6 +11,8 @@ You can either use the gem to write custom ruby code to import data or you can s
 
 `gem 'neo4apis-twitter'` in your Gemfile or `gem install neo4apis-twitter`
 
+### Usage
+
 #### Ruby code
 
 ```ruby
