@@ -3,7 +3,7 @@
 
 neo4apis-twitter is a ruby gem for making importing data from twitter to neo4j easy
 
-This adapter supports objects created from the `twitter` gem.  Currently supports importing User and Tweet
+This adapter supports objects created from the [`twitter` gem](https://github.com/sferik/twitter).  Currently supports importing User and Tweet
 
 You can either use the gem to write custom ruby code to import data or you can simply use the command-line interface.
 
@@ -58,6 +58,8 @@ Supported options:
  * `until`
 
 ##### Config file
+
+Register your app for a Twitter key and token at [https://apps.twitter.com](https://apps.twitter.com). You will need to provide a URL and can use `http://127.0.0.1`.
 
 The default path for the config file is `config/twitter.yml`, but you can specify your path with the `--config-path` option.  The configuration file should match the keys in the [twitter gem`s documentation](https://github.com/sferik/twitter/blob/master/examples/Configuration.md).  The following is an example:
 
