@@ -45,5 +45,6 @@ module Neo4Apis
     end
 
   end
+
 end
 

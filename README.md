@@ -18,7 +18,7 @@ neo4japis_twitter.batch do
     #  * The tweeter, 
     #  * The original tweet if a retweet
     #  * The user for the original tweet
-    import :Tweet, tweet
+    neo4apis_client.import :Tweet, tweet
   end
 end
 
