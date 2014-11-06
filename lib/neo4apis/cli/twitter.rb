@@ -1,5 +1,6 @@
 require 'twitter'
 require 'thor'
+require 'colorize'
 
 module Neo4Apis
   module CLI
@@ -34,10 +35,10 @@ module Neo4Apis
         Proc.new do |object|
           case object
           when ::Twitter::Tweet
-            say "got tweet from @#{object.user.screen_name}: #{object.text}"
+            say "got tweet from @#{object.user.screen_name.colorize(:light_blue)}: #{object.text}"
             neo4apis_client.import :Tweet, object
           when ::Twitter::Streaming::StallWarning
-            puts "Falling behind!"
+            say "FALLING BEHIND!".colorize(:red)
           end
         end
       end
