@@ -1,4 +1,5 @@
 require 'neo4apis'
+require 'ostruct'
 
 module Neo4Apis
   class Twitter < Base
@@ -22,6 +23,14 @@ module Neo4Apis
           hashtag_node = import :HashTag, hashtag
 
           add_relationship :has_hashtag, node, hashtag_node, text: hashtag.text
+        end
+      end
+
+      if options[:import_user_mentions] && tweet.respond_to?(:user_mentions)
+        tweet.user_mentions.each do |user_mention|
+          user_mention_node = import :User, OpenStruct.new(user_mention.attrs)
+
+          add_relationship :mentions_user, node, user_mention_node
         end
       end
 

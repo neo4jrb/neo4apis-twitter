@@ -9,6 +9,7 @@ module Neo4Apis
 
       class_option :import_retweets, type: :boolean, default: false
       class_option :import_hashtags, type: :boolean, default: false
+      class_option :import_user_mentions, type: :boolean, default: false
 
       desc "filter TRACK", "Streams tweets via a filter"
       def filter(track)
@@ -47,7 +48,7 @@ module Neo4Apis
       NEO4APIS_CLIENT_CLASS = ::Neo4Apis::Twitter
 
       def neo4apis_client
-        @neo4apis_client ||= NEO4APIS_CLIENT_CLASS.new(Neo4j::Session.open(:server_db, parent_options[:neo4j_url]), import_retweets: options[:import_retweets], import_hashtags: options[:import_hashtags])
+        @neo4apis_client ||= NEO4APIS_CLIENT_CLASS.new(Neo4j::Session.open(:server_db, parent_options[:neo4j_url]), import_retweets: options[:import_retweets], import_hashtags: options[:import_hashtags], import_user_mentions: options[:import_user_mentions])
       end
 
       def twitter_client(streaming)
