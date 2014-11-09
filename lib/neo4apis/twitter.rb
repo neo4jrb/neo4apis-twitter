@@ -15,7 +15,7 @@ module Neo4Apis
 
       retweeted_tweet_node = import :Tweet, tweet.retweeted_tweet if options[:import_retweets] && tweet.retweeted_tweet?
 
-      node = add_node :Tweet, tweet, %w{id text reply? geo urls media lang source created_at}
+      node = add_node :Tweet, tweet, %w{id text reply? geo urls media lang source favorite_count retweet_count created_at}
 
       if options[:import_hashtags] && tweet.respond_to?(:hashtags)
         tweet.hashtags.each do |hashtag|
