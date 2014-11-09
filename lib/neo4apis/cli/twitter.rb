@@ -22,6 +22,7 @@ module Neo4Apis
       option :locale, type: :string
       option :result_type, type: :string
       option :until, type: :string
+      option :count, type: :integer
       desc "search QUERY COUNT", "Import tweets via a search query"
       def search(query, count)
         neo4apis_client.batch do
