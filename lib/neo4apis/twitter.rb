@@ -3,7 +3,7 @@ require 'ostruct'
 
 module Neo4Apis
   class Twitter < Base
-    prefix :Twitter
+    common_label :Twitter
 
     uuid :Tweet, :id
     uuid :User, :id
