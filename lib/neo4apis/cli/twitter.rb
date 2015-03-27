@@ -123,7 +123,7 @@ module Neo4Apis
       NEO4APIS_CLIENT_CLASS = ::Neo4Apis::Twitter
 
       def neo4apis_client
-        @neo4apis_client ||= NEO4APIS_CLIENT_CLASS.new(neo4j_session, import_retweets: options[:import_retweets], import_hashtags: options[:import_hashtags], import_user_mentions: options[:import_user_mentions])
+        @neo4apis_client ||= NEO4APIS_CLIENT_CLASS.new(specified_neo4j_session, import_retweets: options[:import_retweets], import_hashtags: options[:import_hashtags], import_user_mentions: options[:import_user_mentions])
       end
 
       def twitter_client(streaming = false)
