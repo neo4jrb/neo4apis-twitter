@@ -4,7 +4,7 @@ require 'colorize'
 
 module Neo4Apis
   module CLI
-    class Twitter < Thor
+    class Twitter < Base
       class_option :config_path, type: :string,  default: 'config/twitter.yml'
 
       class_option :import_retweets, type: :boolean, default: false
