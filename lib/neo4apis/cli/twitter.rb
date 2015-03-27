@@ -89,8 +89,6 @@ module Neo4Apis
       def throttled_block
         yield
       rescue ::Twitter::Error::TooManyRequests => error
-        puts error.inspect
-        puts error.rate_limit.inspect
         reset_in = error.rate_limit.reset_in
         puts "Rate limit exceeded.  Sleeping for #{reset_in} seconds"
         sleep reset_in

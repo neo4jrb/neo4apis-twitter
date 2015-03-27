@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    neo4apis-twitter (0.8.0)
+    neo4apis-twitter (0.8.1)
       neo4apis (>= 0.8.0)
       twitter (~> 5.12.0)
 
