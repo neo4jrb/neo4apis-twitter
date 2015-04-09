@@ -91,6 +91,8 @@ module Neo4Apis
       rescue ::Twitter::Error::TooManyRequests => error
         reset_in = error.rate_limit.reset_in
         puts "Rate limit exceeded.  Sleeping for #{reset_in} seconds"
+
+        neo4apis_client.instance_variable_get('@buffer').flush
         sleep reset_in
         retry
       end
